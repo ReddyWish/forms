@@ -1,0 +1,64 @@
+@import './vars';
+@import './globals';
+@import './libs';
+
+.primary-slider .swiper-pagination {
+  bottom: 20px !important;
+  width: 200px !important;
+
+  @media (max-width: $size-tablet) {
+    bottom: 0 !important;
+  }
+}
+
+.primary-slider .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  opacity: 1;
+  margin: 0 10px !important;
+  left: 0 !important;
+}
+
+// этот селектор скрывает неактивные точки, которые мы не хотим видеть
+.primary-slider
+  .swiper-pagination-bullet:not(.swiper-pagination-bullet-active-main):not(
+    .swiper-pagination-bullet-active-next
+  ):not(.swiper-pagination-bullet-active-prev) {
+  visibility: hidden;
+  width: 0;
+  margin: 0 !important;
+}
+
+.primary-slider .swiper-pagination-bullet-active {
+  width: 45px;
+}
+
+.primary-slider .swiper-button-prev,
+.primary-slider .swiper-button-next {
+  top: auto;
+  bottom: 0;
+  width: 48px;
+  height: 48px;
+
+  &:before,
+  &:after {
+    color: $white;
+  }
+
+  @media (max-width: $size-tablet) {
+    display: none;
+  }
+}
+
+.primary-slider .swiper-button-prev {
+  left: 50%;
+  // 128px - это половина ширины пагинации + половина ширины самой кнопки
+  transform: translate(calc(-50% - 128px), 0);
+}
+
+.primary-slider .swiper-button-next {
+  right: 50%;
+  // 128px - это половина ширины пагинации + половина ширины самой кнопки
+  transform: translate(calc(50% + 128px), 0);
+}

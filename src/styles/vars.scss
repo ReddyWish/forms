@@ -1,0 +1,129 @@
+// ================
+// main color
+// ================
+$white: #ffffff;
+$white-30: #eaeaea30;
+$black: #101010;
+$gray: #a7b3cb;
+$error: #b73950;
+
+$orange-100: #ff5600;
+$orange-200: #ee5000;
+
+$gray-100: #828282;
+$gray-100-80: #82828280;
+$gray-800: #efefef;
+$gray-900: #e2e2e2;
+
+// ================
+// size of window
+// ================
+$size-mobile-small: 360px;
+$size-mobile: 500px;
+$size-tablet: 768px;
+$size-laptop: 992px;
+$size-desktop: 1360px;
+
+$integer-mobile-small: 360;
+$integer-mobile: 500;
+$integer-tablet: 768;
+$integer-laptop: 992;
+$integer-desktop: 1360;
+
+$grid-breakpoints: (
+  mobile-small: $size-mobile-small,
+  mobile: $size-mobile,
+  tablet: $size-tablet,
+  laptop: $size-laptop,
+  desktop: $size-desktop,
+);
+
+// ================
+// mixin for short style
+// ================
+
+@mixin fl-center-el {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin fl-bt-cn-el {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin flexColumnCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@mixin flex-container($flex-direction, $justify-content, $align-items) {
+  display: flex;
+  flex-direction: $flex-direction;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
+@mixin margin-bottom-pages {
+  margin-bottom: 100px;
+
+  @media (max-width: $size-tablet) {
+    margin-bottom: 80px;
+  }
+}
+
+// ====================
+$base-font-size: 20px;
+$viewport-width: 1280px;
+@mixin flexible-text($font-size: null) {
+  font-size: $font-size;
+  width: 100%;
+  max-width: 100%;
+
+  @media (min-width: 768px) {
+    font-size: if(
+      $font-size,
+      $font-size,
+      calc(
+        #{$base-font-size} + #{$base-font-size} *
+          (min(100vw, 1360px) / #{$viewport-width})
+      )
+    );
+  }
+}
+
+// converter to %
+@function prc($pxOne, $pxTwo) {
+  @return ($pxOne / $pxTwo) * 100%;
+}
+
+/**
+* @ $pcSize: size desktop 40 (like 40px)
+* @ $mobSize: size mobile 20 (like 20px)
+  @include adaptive-font(60, 30);   => like (60px, 30px) max-min
+ */
+@mixin adaptive-font($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $maxWidth: $integer-desktop - $integer-mobile-small;
+  font-size: calc(
+    #{$mobSize + px} + #{$addSize} *
+      ((min(100vw, 1360px) - $size-mobile-small) / #{$maxWidth})
+  );
+}
+
+/**
+* @ $pcSize: size desktop 40 (like 40px)
+* @ $mobSize: size mobile 20 (like 20px)
+* @include adaptive-line-height(75, 36);   => like (75px, 36px) max-min
+*/
+@mixin adaptive-line-height($pcSize, $mobSize) {
+  $addSize: $pcSize - $mobSize;
+  $maxWidth: $integer-desktop - $integer-mobile-small;
+  line-height: calc(
+    #{$mobSize + px} + #{$addSize} *
+      ((min(100vw, 1360px)- $size-mobile-small) / #{$maxWidth})
+  );
+}
